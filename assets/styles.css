@@ -11,31 +11,38 @@
    1. TOKENS  — brand colours live here (see README "Swap in your own content")
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand palette */
-  --ink:   #16211F;   /* body text, dark bands */
-  --sage:  #7C9082;   /* primary; section fills */
-  --brass: #B0813A;   /* accent: rules, ticks, hovers, focus ring */
-  --linen: #EDEFE8;   /* page base */
-  --mist:  #D8DED4;   /* cards, dividers */
-  --paper: #FBFAF6;   /* raised surfaces */
+  /* Brand palette — warm, earthy, muted.
+     Every mix below was contrast-checked; see README "Colour and contrast". */
+  --ink:   #2B2620;   /* body text, dark bands (warm near-black) */
+  --sage:  #8B9178;   /* muted olive; section fills, decorative only */
+  --brass: #8D5A33;   /* clay accent: rules, ticks, hovers, focus ring */
+  --linen: #F3EEE5;   /* warm cream page base */
+  --mist:  #E2D9C9;   /* warm sand; cards, dividers */
+  --paper: #FCFAF5;   /* warm off-white raised surfaces */
 
-  /* Derived roles — nothing below should use a raw hex value */
+  /* Derived roles — nothing below should use a raw hex value.
+     The mix percentages are chosen so each role clears WCAG AA (4.5:1)
+     against the surface it sits on. Changing them can break that. */
   --bg-base:      var(--linen);
   --bg-raised:    var(--paper);
   --bg-band:      var(--ink);
   --text:         var(--ink);
-  --text-muted:   color-mix(in srgb, var(--ink) 68%, var(--linen));
+  --text-muted:   color-mix(in srgb, var(--ink) 68%, var(--linen));   /* 4.92 */
   --text-on-dark: var(--linen);
-  --text-on-dark-muted: color-mix(in srgb, var(--linen) 74%, var(--ink));
+  --text-on-dark-muted: color-mix(in srgb, var(--linen) 74%, var(--ink)); /* 7.77 */
   --rule:         var(--mist);
   --rule-on-dark: color-mix(in srgb, var(--linen) 22%, var(--ink));
-  --accent:       var(--brass);
-  --accent-deep:  color-mix(in srgb, var(--brass) 82%, var(--ink));
+  --accent:       var(--brass);                                        /* 4.99 */
+  --accent-deep:  color-mix(in srgb, var(--brass) 82%, var(--ink));    /* 5.94 */
+  --accent-on-dark: color-mix(in srgb, var(--brass) 52%, var(--linen));/* 6.17 */
   --primary:      var(--sage);
-  --primary-deep: color-mix(in srgb, var(--sage) 70%, var(--ink));
+  --primary-deep: color-mix(in srgb, var(--sage) 52%, var(--ink));     /* 5.72 */
+  /* Button fill: sage is too light to carry cream text on its own. */
+  --primary-fill: color-mix(in srgb, var(--sage) 62%, var(--ink));     /* 5.45 */
+  --scrim:        color-mix(in srgb, var(--ink) 62%, transparent);
 
   /* Type */
-  --font-display: "Petrona", Georgia, "Times New Roman", serif;
+  --font-display: "Jost", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
   --font-body: "Karla", "Helvetica Neue", Arial, sans-serif;
 
   /* Modular scale — fluid from 375px to 1440px */
@@ -111,12 +118,13 @@ a { color: inherit; }
    -------------------------------------------------------------------------- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 300;
   line-height: var(--leading-tight);
   margin: 0;
-  letter-spacing: -0.012em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
+h3, h4 { font-weight: 400; letter-spacing: -0.01em; }
 
 h1 { font-size: var(--step-5); }
 h2 { font-size: var(--step-4); }
@@ -140,8 +148,8 @@ p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
 .subhead {
   font-family: var(--font-display);
   font-size: var(--step-1);
-  font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
+  line-height: var(--leading-snug);
   color: var(--text-muted);
   max-width: var(--measure);
 }
@@ -181,7 +189,7 @@ p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
   background: var(--bg-band);
   color: var(--text-on-dark);
 }
-.section--ink .eyebrow { color: color-mix(in srgb, var(--brass) 76%, var(--linen)); }
+.section--ink .eyebrow { color: var(--accent-on-dark); }
 .section--ink p { color: var(--text-on-dark-muted); }
 
 /* Use a hairline OR whitespace between sections — never both. Applied only
@@ -217,9 +225,7 @@ p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
   outline-offset: 3px;
   border-radius: var(--radius-s);
 }
-.section--ink :focus-visible {
-  outline-color: color-mix(in srgb, var(--brass) 70%, var(--linen));
-}
+.section--ink :focus-visible { outline-color: var(--accent-on-dark); }
 
 /* Skip link */
 .skip-link {
@@ -260,10 +266,10 @@ p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
 .btn:active { transform: translateY(0); }
 
 .btn--primary {
-  background: var(--primary);
+  background: var(--primary-fill);
   color: var(--paper);
 }
-.btn--primary:hover { background: var(--accent); }
+.btn--primary:hover { background: var(--accent-deep); }
 
 .btn--ghost {
   background: transparent;
@@ -396,8 +402,8 @@ a.card:hover {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--step-1);
-  line-height: 1.5;
-  font-style: italic;
+  font-weight: 300;
+  line-height: 1.45;
 }
 .testimonial blockquote::before { content: "\201C"; color: var(--accent); }
 .testimonial blockquote::after { content: "\201D"; color: var(--accent); }
@@ -524,7 +530,7 @@ a.card:hover {
 .logo .logo-mark { width: 1.85rem; height: 1.85rem; color: var(--primary); flex: none; }
 .logo:hover .logo-mark { color: var(--accent); }
 .logo .logo-word { white-space: nowrap; }
-.logo .logo-word em { font-style: italic; color: var(--accent); }
+.logo .logo-word em { font-style: normal; font-weight: 500; color: var(--accent); }
 
 .nav-toggle {
   display: inline-flex;
@@ -589,7 +595,7 @@ a.card:hover {
 .hero .hero-promise {
   font-family: var(--font-display);
   font-size: var(--step-2);
-  font-style: italic;
+  font-weight: 300;
   line-height: var(--leading-snug);
   color: var(--primary-deep);
   margin-top: var(--space-s);
@@ -681,6 +687,80 @@ a.card:hover {
   54%, 92%  { opacity: 1; }
   100%      { opacity: 0; }
 }
+
+/* --- Photography-led hero: full-bleed image, text and ring over a scrim --- */
+.hero-photo {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: min(86vh, 44rem);
+  color: var(--text-on-dark);
+  overflow: hidden;
+}
+.hero-photo-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Strong enough that cream text clears AA even over a light photograph.
+   If you swap in your own image, re-check the text contrast. */
+.hero-photo-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(105deg,
+      color-mix(in srgb, var(--ink) 88%, transparent) 0%,
+      color-mix(in srgb, var(--ink) 72%, transparent) 48%,
+      color-mix(in srgb, var(--ink) 46%, transparent) 100%);
+}
+.hero-photo-inner {
+  display: grid;
+  gap: var(--space-2xl);
+  align-items: center;
+  padding-block: var(--space-3xl);
+}
+.hero-photo .eyebrow { color: var(--accent-on-dark); }
+.hero-photo h1 { margin-top: var(--space-xs); }
+.hero-photo p { color: var(--text-on-dark-muted); }
+.hero-photo .hero-promise {
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: var(--leading-snug);
+  color: var(--text-on-dark);
+  margin-top: var(--space-s);
+  max-width: 20ch;
+}
+.hero-photo :focus-visible { outline-color: var(--accent-on-dark); }
+.hero-photo .link { color: var(--text-on-dark); border-bottom-color: var(--accent-on-dark); }
+.hero-photo .link:hover { color: var(--accent-on-dark); }
+
+/* The breathing ring reads light when it sits on a photograph */
+.breath--on-photo .breath-ring { stroke: color-mix(in srgb, var(--linen) 78%, transparent); }
+.breath--on-photo .breath-ring--outer { stroke: var(--accent-on-dark); }
+.breath--on-photo .breath-halo { fill: color-mix(in srgb, var(--linen) 12%, transparent); }
+.breath--on-photo .breath-core {
+  fill: color-mix(in srgb, var(--linen) 16%, transparent);
+  stroke: var(--accent-on-dark);
+}
+.breath--on-photo .breath-label { color: var(--text-on-dark); }
+
+/* --- Full-bleed image band, the rhythm between text sections --- */
+.band-image { display: block; width: 100%; background: var(--mist); }
+.band-image img {
+  display: block;
+  width: 100%;
+  height: clamp(14rem, 36vw, 28rem);
+  object-fit: cover;
+}
+
+/* --- Single-column, generously spaced text section --- */
+.section--narrow .wrap { max-width: var(--wrap-narrow); }
+.measure-wide { max-width: 54ch; }
 
 /* --------------------------------------------------------------------------
    8. PAGE BLOCKS
@@ -787,6 +867,7 @@ a.card:hover {
   .nav-list a[aria-current="page"] { border-bottom-color: var(--accent); color: inherit; }
 
   .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+  .hero-photo-inner { grid-template-columns: 1.1fr 0.9fr; }
   .split { grid-template-columns: 1fr 1fr; }
   .split--wide-text { grid-template-columns: 1.15fr 0.85fr; }
 

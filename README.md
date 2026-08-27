@@ -38,6 +38,8 @@ contact.html        Contact details + enquiry form
 assets/styles.css   The entire stylesheet, driven by custom properties
 assets/site.js      Mobile nav toggle + contact form handler
 assets/img/*.svg    Hand-made placeholder illustrations and the favicon
+                    hero-photo.svg    full-bleed hero image
+                    band-*.svg        full-bleed bands between text sections
 wrangler.jsonc      Cloudflare Workers deploy config (hosting only, not a build step)
 .assetsignore       Files wrangler must NOT upload (repo metadata)
 .github/workflows/  Auto-deploy to Cloudflare on every push to main
@@ -47,21 +49,52 @@ wrangler.jsonc      Cloudflare Workers deploy config (hosting only, not a build 
 
 - **Tokens first.** The six brand colours live in `:root` and everything else is
   derived from them with `color-mix()`. No component hard-codes a hex value.
-- **Type scale.** Petrona for display, Karla for body and the uppercase eyebrows.
-  Seven `clamp()` steps (`--step--1` … `--step-5`) scale fluidly from 375px to
-  1440px, so there are no font-size media queries anywhere.
+  The palette is warm and earthy — cream and sand surfaces, muted olive, a clay
+  accent, and a warm near-black rather than a cool one.
+- **Type scale.** Jost for display headings (light weight, large and airy) and
+  Karla for body and the uppercase eyebrows. Seven `clamp()` steps
+  (`--step--1` … `--step-5`) scale fluidly from 375px to 1440px, so there are no
+  font-size media queries anywhere.
 - **Section rhythm.** Every section follows eyebrow → h2 → optional sub-heading →
   one or two short paragraphs → optional button. Backgrounds alternate between
   `--linen` and `--paper`, and each page has exactly one full-width `--ink` band.
 - **One breakpoint.** A single `@media (min-width: 54em)` handles every layout
   change. Card, pillar and testimonial grids use `auto-fit` + `minmax()`, so the
   in-between sizes take care of themselves.
+- **Photography-led.** `index.html` opens on a full-bleed image with the heading,
+  promise and breathing ring over a gradient scrim. Full-bleed image bands break
+  up the text further down each page, giving the long scroll a slower rhythm.
 - **The breathing ring** (hero, `index.html`) is the one bold element: concentric
   SVG circles on a 12-second CSS cycle — 4s expand, 2s hold, 4s contract, 2s hold
   — with a label alternating between "breathe in" and "breathe out". Under
   `@media (prefers-reduced-motion: reduce)` the animation is removed entirely,
   the ring holds a static mid-breath size, and the alternating label is replaced
   by a single static word.
+
+### Colour and contrast
+
+Every text/background pairing was measured, not eyeballed. The `color-mix()`
+percentages in `:root` are chosen so each derived role clears WCAG AA (4.5:1)
+on the surface it sits on:
+
+| Role | Ratio |
+|---|---|
+| body text on cream / on paper | 12.97 / 14.37 |
+| muted text on cream / on paper | 4.92 / 5.45 |
+| clay eyebrow on cream / on paper | 4.99 / 5.53 |
+| primary button fill vs its cream label | 5.45 |
+| text on the dark band | 12.97 |
+| muted text on the dark band | 7.77 |
+| eyebrow on the dark band | 6.17 |
+
+Two of these were genuine fixes, not just re-tuning: the earlier sage button fill
+(3.26) and brass eyebrow (3.00) both failed AA. `--primary-fill` exists because
+`--sage` is too light to carry cream text on its own — use `--sage` for fills and
+decoration, `--primary-fill` for anything with text on it.
+
+If you change the six tokens, re-check these pairings. The hero scrim is
+deliberately heavy so cream text stays legible over an unknown photograph; if you
+swap the hero image, check the heading contrast again.
 
 ### Accessibility
 
@@ -88,14 +121,14 @@ page title. The header block is **byte-identical on every page** except for the
 
 | What | File | Lines |
 |---|---|---|
-| Page `<title>` | `index.html`, `about.html`, `services.html`, `contact.html`, `404.html` | line 6 of each |
+| Page `<title>` | all five pages | line 6 of each |
 | Meta description | same four files | line 7 of each |
 | Shared header (logo mark, wordmark, nav, social) | the four pages | lines 17–62 of each |
 | Shared header/footer on the 404 page | `404.html` | header 18–63 · footer 127–183 |
 | Wordmark in header | the four pages line 29 · `404.html` line 30 | — |
-| Hero `<h1>` "Wildlight Wellness" | `index.html` | line 72 |
-| Shared footer (wordmark, tagline, links, address) | `index.html` 246–302 · `about.html` 186–242 · `services.html` 188–244 · `contact.html` 186–242 | — |
-| Wordmark in footer | `index.html` 257 · `about.html` 197 · `services.html` 199 · `contact.html` 197 |
+| Hero `<h1>` "Wildlight Wellness" | `index.html` | line 76 (inside the photo hero, 67–105) |
+| Shared footer (wordmark, tagline, links, address) | `index.html` 255–311 · `about.html` 191–247 · `services.html` 193–249 · `contact.html` 191–247 · `404.html` 127–183 | — |
+| Wordmark in footer | `index.html` 266 · `about.html` 202 · `services.html` 204 · `contact.html` 202 · `404.html` 138 |
 | Logo SVG mark (three concentric circles) | inline in each header/footer; standalone copy in `assets/img/favicon.svg` | — |
 
 ### 2. Contact details
@@ -105,10 +138,10 @@ page, and once in full on the contact page.
 
 | What | File | Lines |
 |---|---|---|
-| Footer "Reach us" (phone, email, address) | `index.html` 288–294 · `about.html` 228–234 · `services.html` 230–236 · `contact.html` 228–234 | — |
+| Footer "Reach us" (phone, email, address) | starts at `index.html` 297 · `about.html` 233 · `services.html` 235 · `contact.html` 233 · `404.html` 169 | — |
 | Full details list (phone / email / hours / location) | `contact.html` | 86–107 |
 | Crisis / not-an-emergency-service notice | `contact.html` | 109–111 |
-| Direct email CTA in the ink band | `contact.html` | 179 |
+| Direct email CTA in the ink band | `contact.html` | 184 |
 | Social profile URLs (currently `#instagram-placeholder`, `#facebook-placeholder`) | all four pages | header 45, 50, 54 · footer 261/266/270 (`index.html`), 201/206/210 (others) |
 | `mailto:` address | all four pages | header line 54; footer as above |
 
@@ -116,13 +149,13 @@ page, and once in full on the contact page.
 
 | What | File | Lines |
 |---|---|---|
-| Service preview cards (names + one-liners) | `index.html` | 205–224 |
+| Service preview cards (names + one-liners) | `index.html` | 214–233 |
 | **Somatic Unwinding** — heading, price, copy, what's included, CTA | `services.html` | 79–107 |
 | **Inner Compass Sessions** — same | `services.html` | 110–137 |
-| **Seasons Circle** — same | `services.html` | 140–168 |
-| Price lines (`$000 placeholder`) | `services.html` | 90, 121, 151 |
+| **Seasons Circle** — same | `services.html` | 145–173 |
+| Price lines (`$000 placeholder`) | `services.html` | 90, 121, 156 |
 | Service options in the enquiry form `<select>` | `contact.html` | 134–140 |
-| Section anchors (`#somatic-unwinding`, `#inner-compass`, `#seasons-circle`) | `services.html` 79, 110, 140 — also linked from `index.html` 205, 212, 219 | — |
+| Section anchors (`#somatic-unwinding`, `#inner-compass`, `#seasons-circle`) | `services.html` 79, 110, 145 — also linked from `index.html` 214, 221, 228 | — |
 
 If you rename a service, update its `id` **and** the three links in
 `index.html` that point at it.
@@ -132,11 +165,11 @@ If you rename a service, update its `id` **and** the three links in
 | What | File | Lines |
 |---|---|---|
 | The six brand colours (`--ink`, `--sage`, `--brass`, `--linen`, `--mist`, `--paper`) | `assets/styles.css` | 15–20 |
-| Derived roles (text, rules, hovers — all `color-mix()` of the six above) | `assets/styles.css` | 22–35 |
-| Font families | `assets/styles.css` | 38–39 |
-| Google Fonts `<link>` | all four pages | line 11 of each |
-| Type scale (`--step--1` … `--step-5`) | `assets/styles.css` | 42–48 |
-| Spacing scale | `assets/styles.css` | 55–64 |
+| Derived roles (text, rules, hovers — all `color-mix()` of the six above) | `assets/styles.css` | 23–42 |
+| Font families | `assets/styles.css` | 45–46 |
+| Google Fonts `<link>` | all five pages | line 9–11 (`404.html` 10–12) |
+| Type scale (`--step--1` … `--step-5`) | `assets/styles.css` | 49–55 |
+| Spacing scale | `assets/styles.css` | 62–71 |
 
 Changing lines 15–20 re-themes the whole site; nothing below that block uses a
 raw hex value. If you change the font families, update the Google Fonts `<link>`
@@ -149,12 +182,15 @@ palette. Replace the files, keep the filenames, and update the `alt` text:
 
 | File | Used on | Alt text at |
 |---|---|---|
+| `hero-photo.svg` | `index.html` full-bleed hero | `index.html` 68–69 |
+| `band-quiet.svg` | `index.html`, `services.html` bands | `index.html` 153 · `services.html` 141 |
+| `band-hands.svg` | `about.html`, `contact.html` bands | `about.html` 109 · `contact.html` 170 |
 | `portrait-placeholder.svg` | `about.html` story section | `about.html` 83–84 |
-| `about-studio.svg` | `about.html` philosophy section | `about.html` 112–113 |
+| `about-studio.svg` | `about.html` philosophy section | `about.html` 117–118 |
 | `service-somatic.svg` | `services.html` block one | `services.html` 83–84 |
 | `service-inner-compass.svg` | `services.html` block two | `services.html` 114–115 |
 | `service-seasons.svg` | `services.html` block three | `services.html` 144–145 |
-| `favicon.svg` | all four pages | `<link rel="icon">`, line 8 of each |
+| `favicon.svg` | all five pages | `<link rel="icon">`, line 8 (`404.html` 9) |
 
 If you swap in photographs, keep the `aspect-ratio` on `.media img`
 (`assets/styles.css`) or set your own — the frames expect 4:3, and 3:4 for the
@@ -162,8 +198,8 @@ portrait.
 
 ### 6. Testimonials
 
-The three quotes on `about.html` (lines 147–164) are invented, and labelled as
-such in the surrounding copy at lines 140–142. Replace them with real, consented
+The three quotes on `about.html` (lines 152–169) are invented, and labelled as
+such in the surrounding copy at lines 145–147. Replace them with real, consented
 client feedback — and delete that disclaimer paragraph when you do.
 
 ---
