@@ -1167,3 +1167,25 @@ a.card:hover {
 
 /* Outlined panel used for the "join us" callout */
 .bordered-panel { border: 1px solid var(--rule); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
+
+/* --- Homepage refinements against the reference screenshots --- */
+
+/* The three-up band reads as one continuous strip, not separated cards */
+.trio--flush { gap: 0; }
+.trio--flush .trio-media img { min-height: 100%; }
+
+/* Let a heading sit tight against the band it introduces */
+.section--flush-bottom { padding-bottom: var(--space-l); }
+.section--flush-top { padding-top: var(--space-l); }
+
+/* Section intro split: heading left, supporting line right, baseline aligned */
+.intro-split { align-items: end; }
+.intro-split .stack p { margin-bottom: 0.35em; }
+
+/* Feature columns in the flanking layout align to the top so the two
+   stacks start level regardless of how many lines each heading takes */
+.trio--flank > .stack { align-self: start; display: grid; gap: var(--space-xl); }
+
+/* Footer bar should run to the bottom of the document */
+body { background: var(--mist); }
+main { background: var(--linen); }
