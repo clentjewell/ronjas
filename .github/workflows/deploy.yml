@@ -1,0 +1,61 @@
+# Auto-deploy to Cloudflare Workers on every push to main.
+#
+# Requires two repository secrets
+# (Settings -> Secrets and variables -> Actions -> New repository secret):
+#   CLOUDFLARE_API_TOKEN   - a token with the "Edit Cloudflare Workers" template
+#   CLOUDFLARE_ACCOUNT_ID  - your Cloudflare account ID
+#
+# There is no build step: wrangler uploads the files in the repo as they are.
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches: [main]
+    # Skip runs that only touch files which never reach the deployed site.
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+  # Lets you re-run a deploy by hand from the Actions tab.
+  workflow_dispatch:
+
+# Never let two deploys race; a newer push supersedes an in-flight one.
+concurrency:
+  group: deploy-workers
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Upload static assets
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Deploy with Wrangler
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify the live site
+        run: |
+          set -euo pipefail
+          BASE="https://wildlight-wellness.clent.workers.dev"
+
+          # Every page must return 200.
+          for path in / /about /services /contact; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 3 --max-time 30 "$BASE$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || { echo "::error::$path returned $code, expected 200"; exit 1; }
+          done
+
+          # Repo metadata must never be publicly served.
+          for path in /.git/config /README.md /wrangler.jsonc; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$BASE$path")
+            echo "$path -> $code"
+            [ "$code" = "404" ] || { echo "::error::$path returned $code, expected 404 (check .assetsignore)"; exit 1; }
+          done
+
+          echo "Live site verified."

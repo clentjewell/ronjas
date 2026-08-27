@@ -40,6 +40,7 @@ assets/site.js      Mobile nav toggle + contact form handler
 assets/img/*.svg    Hand-made placeholder illustrations and the favicon
 wrangler.jsonc      Cloudflare Workers deploy config (hosting only, not a build step)
 .assetsignore       Files wrangler must NOT upload (repo metadata)
+.github/workflows/  Auto-deploy to Cloudflare on every push to main
 ```
 
 ### Design notes
@@ -225,6 +226,28 @@ The site's internal links deliberately keep the `.html` extension so that
 307 redirect per internal click on the hosted version. If you would rather links
 resolve with no redirect, set `"html_handling": "none"` in `wrangler.jsonc` — you
 then lose the extensionless URLs.
+
+### Auto-deploy on push
+
+`.github/workflows/deploy.yml` deploys to Cloudflare on every push to `main`.
+It checks out the repo, runs `cloudflare/wrangler-action`, then verifies the live
+site: all four pages must return 200, and `.git/config`, `README.md` and
+`wrangler.jsonc` must return 404. If any check fails, the run fails loudly rather
+than leaving a bad deploy unnoticed.
+
+**It needs two repository secrets before it can work.** Add them under
+Settings → Secrets and variables → Actions → New repository secret:
+
+| Secret | Where to get it |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare dashboard → My Profile → API Tokens → Create Token → **Edit Cloudflare Workers** template |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard → Workers & Pages → Account ID in the right-hand sidebar |
+
+Until both exist, the workflow will run and fail on authentication. Manual
+`npx wrangler deploy` keeps working regardless.
+
+Pushes that only touch `README.md` or `.gitignore` are skipped, since neither is
+ever uploaded. Concurrent runs cancel in-flight ones so a newer push always wins.
 
 ### Custom domain
 
