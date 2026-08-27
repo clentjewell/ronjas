@@ -916,3 +916,105 @@ a.card:hover {
 .section-body-tight { margin-top: var(--space-m); }
 .footer-social { margin-top: var(--space-2xs); }
 .form-title { font-size: var(--step-2); }
+
+/* --------------------------------------------------------------------------
+   13. MIGRATED LAYOUT PATTERNS (from the original WordPress build)
+   -------------------------------------------------------------------------- */
+
+/* Full-bleed photographic band with a scrim, used for heroes and pull sections.
+   The scrim is deliberately heavy so cream text clears AA over any photograph. */
+.section--photo {
+  position: relative;
+  isolation: isolate;
+  color: var(--text-on-dark);
+  background: var(--ink);
+}
+.section--photo > .photo-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.section--photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(100deg,
+      color-mix(in srgb, var(--ink) 82%, transparent) 0%,
+      color-mix(in srgb, var(--ink) 62%, transparent) 55%,
+      color-mix(in srgb, var(--ink) 40%, transparent) 100%),
+    /* floor: guarantees a minimum darkness whatever the photograph */
+    color-mix(in srgb, var(--ink) 45%, transparent);
+}
+.section--photo .eyebrow { color: var(--accent-on-dark); }
+.section--photo h1, .section--photo h2, .section--photo h3, .section--photo h4 { color: var(--text-on-dark); }
+/* These default to dark-on-light colours; on a photograph they must invert. */
+.section--photo .hero-promise,
+.section--photo .subhead,
+.section--photo .checklist li,
+.section--photo .faq dt { color: var(--text-on-dark); }
+.section--photo .checklist li { border-bottom-color: var(--rule-on-dark); }
+.section--photo .tick { color: var(--accent-on-dark); }
+.section--photo .detail-list > div { border-bottom-color: var(--rule-on-dark); }
+.section--photo .detail-list dt { color: var(--accent-on-dark); }
+.section--photo .detail-list dd, .section--photo .detail-list dd a { color: var(--text-on-dark); }
+.section--photo p { color: var(--text-on-dark-muted); }
+.section--photo :focus-visible { outline-color: var(--accent-on-dark); }
+.section--photo .link { color: var(--text-on-dark); border-bottom-color: var(--accent-on-dark); }
+.hero--photo { min-height: min(82vh, 42rem); display: grid; align-items: center; }
+
+/* Icon + heading + copy, used for "Why choose us" and the benefit rows */
+.features { display: grid; gap: var(--space-xl); grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.feature { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.feature img { width: 3rem; height: 3rem; object-fit: contain; margin-bottom: var(--space-2xs); }
+.feature h3, .feature h4 { font-size: var(--step-1); }
+.feature p { font-size: var(--step--1); color: var(--text-muted); }
+.section--ink .feature p, .section--photo .feature p { color: var(--text-on-dark-muted); }
+
+/* Service detail rows, alternating image side */
+.detail-row + .detail-row { margin-top: var(--space-3xl); }
+
+/* Event / offer cards */
+.offers { display: grid; gap: var(--space-l); grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.offer {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+}
+.section--paper .offer { background: var(--bg-base); }
+.offer img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.offer-body { display: flex; flex-direction: column; gap: var(--space-2xs); padding: var(--space-l); flex: 1; }
+.offer-meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent);
+}
+.offer h3 { font-size: var(--step-1); }
+.offer .offer-fee {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 400;
+  color: var(--primary-deep);
+}
+.offer .offer-fee s { color: var(--text-muted); font-size: var(--step-0); margin-left: .35em; }
+.offer p { font-size: var(--step--1); color: var(--text-muted); }
+.offer .btn-row { margin-top: auto; padding-top: var(--space-s); }
+
+/* Fees / FAQ definition rows */
+.faq { display: grid; gap: 0; margin-top: var(--space-l); }
+.faq > div { padding-block: var(--space-m); border-top: 1px solid var(--rule); }
+.faq > div:last-child { border-bottom: 1px solid var(--rule); }
+.faq dt { font-family: var(--font-display); font-size: var(--step-1); margin-bottom: var(--space-3xs); }
+.faq dd { margin: 0; color: var(--text-muted); font-size: var(--step--1); max-width: var(--measure); }
+
+/* A photo used as a plain full-width band between sections */
+.photo-band img { display: block; width: 100%; height: clamp(14rem, 34vw, 26rem); object-fit: cover; }
