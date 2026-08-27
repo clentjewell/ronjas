@@ -1,8 +1,10 @@
-# Wildlight Wellness
+# Ronja's Joy
 
-A static marketing site for **Wildlight Wellness**, a fictional holistic wellness
-and emotional-healing practice. Every word, colour and shape here is original
-placeholder content, written to be swapped out.
+A static site for **Ronja's Joy** — the Egyptian Emotional Clearing Technique
+practice in Banora Point, NSW. This replaces a WordPress + Astra + Elementor build.
+
+Copy, contact details, logo and icons are the client's own, migrated from the
+existing site. Layout, CSS and JavaScript are written from scratch here.
 
 No build step, no framework, no npm, no CSS framework. Four HTML files, one
 hand-written stylesheet, one small vanilla JavaScript file and a folder of SVG
@@ -44,6 +46,27 @@ wrangler.jsonc      Cloudflare Workers deploy config (hosting only, not a build 
 .assetsignore       Files wrangler must NOT upload (repo metadata)
 .github/workflows/  Auto-deploy to Cloudflare on every push to main
 ```
+
+### Brand assets and where they came from
+
+| Asset | Source |
+|---|---|
+| `assets/img/logo-eect.png` | client's site — header logo |
+| `assets/img/logo-footer.png` | client's site — footer mark |
+| `assets/img/icon-*.png` (6) | client's site — Elementor icon set |
+| Palette | **sampled from the logo files**, not guessed |
+| Fonts | Josefin Sans + Poppins — two of the five the old site loaded |
+
+The brand brown `#704820` is the exact colour of the tree mark in the EECT logo;
+the olive `#586848` is sampled from the footer mark. Everything else derives from
+those two plus three warm neutrals.
+
+**Still outstanding:** the old site had no photography in its markup, so the
+portrait and section images are still generated placeholders
+(`portrait-placeholder.svg`, `about-studio.svg`, `service-*.svg`). Drop real
+photographs in at those paths and update the `alt` text. Social profile URLs are
+also still `#facebook-placeholder` / `#instagram-placeholder` — the old site's
+icons had no href on them.
 
 ### Design notes
 
@@ -110,114 +133,68 @@ swap the hero image, check the heading contrast again.
 
 ## Swap in your own content
 
-Line numbers are from the initial commit. Search for the quoted strings if they
-have drifted.
+Line numbers are from this commit and were generated from the files, not by hand.
+Search for the quoted strings if they drift.
 
 ### 1. Brand name and logo
 
-The name appears in the shared header and footer of all four pages, plus the
-page title. The header block is **byte-identical on every page** except for the
-`aria-current="page"` marker — edit one, then paste it over the others.
+The header block is byte-identical on every page except the `aria-current="page"`
+marker — edit one, then paste it over the others.
 
-| What | File | Lines |
-|---|---|---|
-| Page `<title>` | all five pages | line 6 of each |
-| Meta description | same four files | line 7 of each |
-| Shared header (logo mark, wordmark, nav, social) | the four pages | lines 17–62 of each |
-| Shared header/footer on the 404 page | `404.html` | header 18–63 · footer 127–183 |
-| Wordmark in header | the four pages line 29 · `404.html` line 30 | — |
-| Hero `<h1>` "Wildlight Wellness" | `index.html` | line 76 (inside the photo hero, 67–105) |
-| Shared footer (wordmark, tagline, links, address) | `index.html` 255–311 · `about.html` 191–247 · `services.html` 193–249 · `contact.html` 191–247 · `404.html` 127–183 | — |
-| Wordmark in footer | `index.html` 266 · `about.html` 202 · `services.html` 204 · `contact.html` 202 · `404.html` 138 |
-| Logo SVG mark (three concentric circles) | inline in each header/footer; standalone copy in `assets/img/favicon.svg` | — |
+| What | Where |
+|---|---|
+| Page `<title>` | line 6 of all five pages |
+| Meta description | line 7 of all five pages |
+| Google Fonts `<link>` | line 11 (`404.html` line 12); the two `preconnect` hints sit just above |
+| Shared header, logo to `</header>` | lines 17–58 (`404.html` 18–59) |
+| Header logo image | `assets/img/logo-eect.png`, line 24 of each page (`404.html` 25) |
+| Hero `<h1>` "Ronja's Joy" | `index.html` line 68 |
+| Page `<h1>` | `about.html` 65 · `services.html` 65 · `contact.html` 65 · `404.html` 66 |
+| Shared footer | `index.html` 236–288 · `about.html` 161–213 · `services.html` 177–229 · `contact.html` 178–230 · `404.html` 119–171 |
+| Footer logo image | `assets/img/logo-footer.png`, first line of each footer block |
 
 ### 2. Contact details
 
-Phone, email and postal address appear twice: once in the shared footer of every
-page, and once in full on the contact page.
+Phone, email, hours and location appear in the shared footer of every page, and in
+full on the contact page.
 
-| What | File | Lines |
-|---|---|---|
-| Footer "Reach us" (phone, email, address) | starts at `index.html` 297 · `about.html` 233 · `services.html` 235 · `contact.html` 233 · `404.html` 169 | — |
-| Full details list (phone / email / hours / location) | `contact.html` | 86–107 |
-| Crisis / not-an-emergency-service notice | `contact.html` | 109–111 |
-| Direct email CTA in the ink band | `contact.html` | 184 |
-| Social profile URLs (currently `#instagram-placeholder`, `#facebook-placeholder`) | all four pages | header 45, 50, 54 · footer 261/266/270 (`index.html`), 201/206/210 (others) |
-| `mailto:` address | all four pages | header line 54; footer as above |
+| What | Where |
+|---|---|
+| Full details list (phone / email / opening times / visit us) | `contact.html` 79–96 |
+| Crisis notice (000 / Lifeline) | `contact.html`, just below the details list |
+| Footer "Contact" column | inside each footer block, above |
+| `mailto:` address | header social row, and the footer of every page |
+| Social profile URLs | header lines 41 and 45 (`#facebook-placeholder`, `#instagram-placeholder`), plus the same pair in the footer |
 
-### 3. Service names and copy
+### 3. Services
 
-| What | File | Lines |
-|---|---|---|
-| Service preview cards (names + one-liners) | `index.html` | 214–233 |
-| **Somatic Unwinding** — heading, price, copy, what's included, CTA | `services.html` | 79–107 |
-| **Inner Compass Sessions** — same | `services.html` | 110–137 |
-| **Seasons Circle** — same | `services.html` | 145–173 |
-| Price lines (`$000 placeholder`) | `services.html` | 90, 121, 156 |
-| Service options in the enquiry form `<select>` | `contact.html` | 134–140 |
-| Section anchors (`#somatic-unwinding`, `#inner-compass`, `#seasons-circle`) | `services.html` 79, 110, 145 — also linked from `index.html` 214, 221, 228 | — |
+| What | Where |
+|---|---|
+| **Emotional Clearing Technique** | `services.html` from line 73 |
+| **Lifestyle Transformation** | `services.html` from line 103 |
+| **Essential Oil Education** | `services.html` from line 132 |
+| Service preview cards | `index.html` from line 195 |
+| Service options in the enquiry `<select>` | `contact.html`, inside the form at line 105 |
 
-If you rename a service, update its `id` **and** the three links in
+Rename a service and you must update its `id` **and** the three links in
 `index.html` that point at it.
 
 ### 4. Colour tokens and type
 
 | What | File | Lines |
 |---|---|---|
-| The six brand colours (`--ink`, `--sage`, `--brass`, `--linen`, `--mist`, `--paper`) | `assets/styles.css` | 15–20 |
-| Derived roles (text, rules, hovers — all `color-mix()` of the six above) | `assets/styles.css` | 23–42 |
+| The six brand colours | `assets/styles.css` | 16–21 |
+| Derived roles (all `color-mix()` of the six) | `assets/styles.css` | just below, to line 42 |
 | Font families | `assets/styles.css` | 45–46 |
-| Google Fonts `<link>` | all five pages | line 9–11 (`404.html` 10–12) |
-| Type scale (`--step--1` … `--step-5`) | `assets/styles.css` | 49–55 |
-| Spacing scale | `assets/styles.css` | 62–71 |
 
-Changing lines 15–20 re-themes the whole site; nothing below that block uses a
-raw hex value. If you change the font families, update the Google Fonts `<link>`
-on all four pages to match.
+Changing lines 16–21 re-themes the whole site; nothing below uses a raw hex value.
+Re-check the contrast table above if you do — several roles sit close to the AA
+floor by design.
 
-### 5. Placeholder images
+### 5. Images
 
-Every illustration in `assets/img/` was drawn as flat SVG using the brand
-palette. Replace the files, keep the filenames, and update the `alt` text:
-
-| File | Used on | Alt text at |
-|---|---|---|
-| `hero-photo.svg` | `index.html` full-bleed hero | `index.html` 68–69 |
-| `band-quiet.svg` | `index.html`, `services.html` bands | `index.html` 153 · `services.html` 141 |
-| `band-hands.svg` | `about.html`, `contact.html` bands | `about.html` 109 · `contact.html` 170 |
-| `portrait-placeholder.svg` | `about.html` story section | `about.html` 83–84 |
-| `about-studio.svg` | `about.html` philosophy section | `about.html` 117–118 |
-| `service-somatic.svg` | `services.html` block one | `services.html` 83–84 |
-| `service-inner-compass.svg` | `services.html` block two | `services.html` 114–115 |
-| `service-seasons.svg` | `services.html` block three | `services.html` 144–145 |
-| `favicon.svg` | all five pages | `<link rel="icon">`, line 8 (`404.html` 9) |
-
-If you swap in photographs, keep the `aspect-ratio` on `.media img`
-(`assets/styles.css`) or set your own — the frames expect 4:3, and 3:4 for the
-portrait.
-
-### 6. Testimonials
-
-The three quotes on `about.html` (lines 152–169) are invented, and labelled as
-such in the surrounding copy at lines 145–147. Replace them with real, consented
-client feedback — and delete that disclaimer paragraph when you do.
-
----
-
-## Wiring up the contact form
-
-The form is plain HTML. `assets/site.js` intercepts the submit, runs the
-browser's own validation, and reveals the inline confirmation. Nothing is sent
-anywhere.
-
-To connect a real backend, replace the body of `sendEnquiry()` at
-**`assets/site.js` lines 78–84** — a worked `fetch()` example sits directly above
-it, inside the comment at **lines 56–73** (the example itself is lines 61–70). The function just has to return a Promise.
-
-Then set `action` and `method` on the `<form>` element (`contact.html` line 116)
-so the form degrades gracefully with JavaScript disabled.
-
----
+Client assets are real. The remaining `.svg` files are placeholders awaiting
+photography — keep the filenames and update the `alt` text when you replace them.
 
 ## Hosting on Cloudflare Workers
 

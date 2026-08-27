@@ -13,12 +13,12 @@
 :root {
   /* Brand palette — warm, earthy, muted.
      Every mix below was contrast-checked; see README "Colour and contrast". */
-  --ink:   #2B2620;   /* body text, dark bands (warm near-black) */
-  --sage:  #8B9178;   /* muted olive; section fills, decorative only */
-  --brass: #8D5A33;   /* clay accent: rules, ticks, hovers, focus ring */
-  --linen: #F3EEE5;   /* warm cream page base */
-  --mist:  #E2D9C9;   /* warm sand; cards, dividers */
-  --paper: #FCFAF5;   /* warm off-white raised surfaces */
+  --ink:   #2B211A;   /* body text, dark bands (warm near-black) */
+  --sage:  #586848;   /* olive, sampled from the footer logo mark */
+  --brass: #704820;   /* THE brand brown, sampled from the EECT logo */
+  --linen: #F6F1E9;   /* warm cream page base */
+  --mist:  #E7DDCB;   /* warm sand; cards, dividers */
+  --paper: #FDFBF7;   /* warm off-white raised surfaces */
 
   /* Derived roles — nothing below should use a raw hex value.
      The mix percentages are chosen so each role clears WCAG AA (4.5:1)
@@ -42,8 +42,8 @@
   --scrim:        color-mix(in srgb, var(--ink) 62%, transparent);
 
   /* Type */
-  --font-display: "Jost", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-body: "Karla", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Josefin Sans", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Poppins", "Helvetica Neue", Arial, sans-serif;
 
   /* Modular scale — fluid from 375px to 1440px */
   --step--1: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
@@ -124,7 +124,8 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
-h3, h4 { font-weight: 400; letter-spacing: -0.01em; }
+h3, h4 { font-weight: 400; letter-spacing: 0; }
+h1, h2 { letter-spacing: -0.005em; }
 
 h1 { font-size: var(--step-5); }
 h2 { font-size: var(--step-4); }
@@ -513,7 +514,7 @@ a.card:hover {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-m);
-  min-height: 4.5rem;
+  min-height: 6rem;
 }
 
 .logo {
@@ -527,10 +528,9 @@ a.card:hover {
   line-height: 1;
   letter-spacing: -0.01em;
 }
-.logo .logo-mark { width: 1.85rem; height: 1.85rem; color: var(--primary); flex: none; }
-.logo:hover .logo-mark { color: var(--accent); }
-.logo .logo-word { white-space: nowrap; }
-.logo .logo-word em { font-style: normal; font-weight: 500; color: var(--accent); }
+.logo img { width: 6.25rem; height: auto; flex: none; transition: opacity var(--transition); }
+.logo:hover img { opacity: .8; }
+.footer-brand .logo img { width: 11rem; height: auto; }
 
 .nav-toggle {
   display: inline-flex;
