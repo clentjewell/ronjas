@@ -1,0 +1,13 @@
+# Files here are NOT uploaded to Cloudflare. Gitignore syntax.
+# Anything not listed becomes publicly fetchable, so keep repo metadata out.
+**/.git
+**/.git/**
+**/.github
+**/node_modules
+**/.wrangler
+**/.vscode
+**/.DS_Store
+wrangler.jsonc
+.assetsignore
+.gitignore
+README.md

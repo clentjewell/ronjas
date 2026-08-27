@@ -34,9 +34,12 @@ index.html          Home: hero + breathing ring, benefits, pillars, service prev
 about.html          Story, philosophy, three testimonials, CTA
 services.html       Three service detail blocks (alternating image side), CTA
 contact.html        Contact details + enquiry form
+404.html            Not-found page, served by Cloudflare for unmatched paths
 assets/styles.css   The entire stylesheet, driven by custom properties
 assets/site.js      Mobile nav toggle + contact form handler
 assets/img/*.svg    Hand-made placeholder illustrations and the favicon
+wrangler.jsonc      Cloudflare Workers deploy config (hosting only, not a build step)
+.assetsignore       Files wrangler must NOT upload (repo metadata)
 ```
 
 ### Design notes
@@ -84,10 +87,11 @@ page title. The header block is **byte-identical on every page** except for the
 
 | What | File | Lines |
 |---|---|---|
-| Page `<title>` | `index.html`, `about.html`, `services.html`, `contact.html` | line 6 of each |
+| Page `<title>` | `index.html`, `about.html`, `services.html`, `contact.html`, `404.html` | line 6 of each |
 | Meta description | same four files | line 7 of each |
-| Shared header (logo mark, wordmark, nav, social) | same four files | lines 17–62 of each |
-| Wordmark in header | same four files | line 29 of each |
+| Shared header (logo mark, wordmark, nav, social) | the four pages | lines 17–62 of each |
+| Shared header/footer on the 404 page | `404.html` | header 18–63 · footer 127–183 |
+| Wordmark in header | the four pages line 29 · `404.html` line 30 | — |
 | Hero `<h1>` "Wildlight Wellness" | `index.html` | line 72 |
 | Shared footer (wordmark, tagline, links, address) | `index.html` 246–302 · `about.html` 186–242 · `services.html` 188–244 · `contact.html` 186–242 | — |
 | Wordmark in footer | `index.html` 257 · `about.html` 197 · `services.html` 199 · `contact.html` 197 |
@@ -175,6 +179,58 @@ it, inside the comment at **lines 56–73** (the example itself is lines 61–70
 
 Then set `action` and `method` on the `<form>` element (`contact.html` line 116)
 so the form degrades gracefully with JavaScript disabled.
+
+---
+
+## Hosting on Cloudflare Workers
+
+The site is deployed as a **Workers static-assets** project — no Worker script,
+no bundler, no framework. Wrangler uploads the files exactly as they are in this
+repo, so the "no build step" rule still holds: `wrangler.jsonc` is hosting
+configuration, not a build pipeline.
+
+Live: <https://wildlight-wellness.clent.workers.dev>
+
+### Deploying an update
+
+```
+npx wrangler deploy
+```
+
+That's the whole workflow. Edit a file, run the command, it's live. Wrangler
+needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in your environment, or
+run `npx wrangler login` once to authenticate interactively.
+
+### What gets uploaded
+
+Only the site: the five HTML pages, `assets/styles.css`, `assets/site.js` and the
+six SVGs — 13 files. Because `assets.directory` is the repo root, **`.assetsignore`
+is what keeps everything else out**, including `.git`, `README.md` and
+`wrangler.jsonc` itself. If you add a file that should not be public, add it to
+`.assetsignore` before deploying, then confirm it 404s on the live URL.
+
+### URL behaviour
+
+`html_handling` is `auto-trailing-slash`, so the canonical URLs are extensionless:
+
+| Request | Result |
+|---|---|
+| `/` | `index.html` |
+| `/about` | `about.html` (200) |
+| `/about.html` | 307 redirect to `/about` |
+| anything unmatched | `404.html` with a real 404 status |
+
+The site's internal links deliberately keep the `.html` extension so that
+`index.html` still works when opened straight off the filesystem. The cost is one
+307 redirect per internal click on the hosted version. If you would rather links
+resolve with no redirect, set `"html_handling": "none"` in `wrangler.jsonc` — you
+then lose the extensionless URLs.
+
+### Custom domain
+
+`wildlight-wellness.clent.workers.dev` is the free workers.dev subdomain. To put
+this on a real domain, add the domain to the same Cloudflare account, then attach
+it under Workers &amp; Pages → wildlight-wellness → Settings → Domains & Routes.
 
 ---
 

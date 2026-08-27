@@ -1,0 +1,14 @@
+{
+  // Cloudflare Workers — static assets only. There is no Worker script and no
+  // build step: wrangler uploads the files in this directory as-is.
+  // Deploy with:  npx wrangler deploy
+  "name": "wildlight-wellness",
+  "compatibility_date": "2026-08-27",
+  "assets": {
+    "directory": "./",
+    // Serve 404.html for anything that doesn't match a file.
+    "not_found_handling": "404-page",
+    // Default. Serves /about for about.html, and keeps folder indexes on a slash.
+    "html_handling": "auto-trailing-slash"
+  }
+}
