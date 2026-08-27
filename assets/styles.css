@@ -55,7 +55,8 @@
 
   /* Type */
   --font-display: "Josefin Sans", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-body: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --font-alt: "Roboto Flex", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
 
   /* Modular scale — fluid from 375px to 1440px */
   --step--1: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
@@ -1310,4 +1311,47 @@ a.card--beige:hover {
 }
 
 /* Section intro: the supporting line reads at body-plus size */
-.intro-split .stack p { font-size: var(--step-1); line-height: 1.55; color: var(--text); }
+.intro-split .stack p:not(.eyebrow) { font-size: var(--step-1); line-height: 1.55; color: var(--text); }
+
+
+/* --------------------------------------------------------------------------
+   15. "How can we help you" — exact type specification
+   -------------------------------------------------------------------------- */
+.intro-split .eyebrow--gold {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 300;
+  color: #E6AE59;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.intro-split h2 {
+  font-family: var(--font-display);
+  font-size: 49px;
+  font-weight: 500;
+  color: #754C23;
+  letter-spacing: normal;
+}
+.intro-split .stack p:not(.eyebrow) {
+  font-family: var(--font-alt);
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--body-txt);
+}
+.card--beige h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: #754C23;
+}
+.card--beige p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--body-txt);
+}
+@media (max-width: 54em) {
+  .intro-split h2 { font-size: clamp(2rem, 1.2rem + 3.5vw, 49px); }
+}
