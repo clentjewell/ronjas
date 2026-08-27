@@ -1268,3 +1268,38 @@ main { background: var(--linen); }
 /* Footer columns: keep single-line entries on one line */
 .footer-col li { text-wrap: nowrap; }
 @media (max-width: 54em) { .footer-col li { text-wrap: pretty; } }
+
+
+/* --- "How can we help you" section, matched to the reference --- */
+
+/* This section's eyebrow is gold rather than the green used elsewhere */
+.eyebrow--gold { color: var(--gold); font-weight: 400; }
+
+/* Service cards: taller, roomier, no trailing link, gold outline on hover */
+.cards { gap: var(--space-m); }
+.card--beige {
+  background: var(--card);
+  border: 1px solid transparent;
+  border-radius: 0;
+  text-align: center;
+  padding: clamp(2rem, 1.2rem + 2.5vw, 3.25rem) clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  min-height: 26rem;
+  justify-content: flex-start;
+  gap: var(--space-m);
+}
+.card--beige h3 {
+  font-size: var(--step-2);
+  font-weight: 400;
+  color: var(--brass);
+  line-height: 1.25;
+}
+.card--beige p { font-size: var(--step-0); color: var(--text-muted); }
+a.card--beige:hover {
+  background: var(--paper);
+  border-color: var(--gold);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Section intro: the supporting line reads at body-plus size */
+.intro-split .stack p { font-size: var(--step-1); line-height: 1.55; color: var(--text); }
