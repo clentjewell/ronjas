@@ -11,39 +11,47 @@
    1. TOKENS  — brand colours live here (see README "Swap in your own content")
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand palette — warm, earthy, muted.
-     Every mix below was contrast-checked; see README "Colour and contrast". */
-  --ink:   #2B211A;   /* body text, dark bands (warm near-black) */
-  --sage:  #586848;   /* olive, sampled from the footer logo mark */
-  --brass: #704820;   /* THE brand brown, sampled from the EECT logo */
-  --linen: #F6F1E9;   /* warm cream page base */
-  --mist:  #E7DDCB;   /* warm sand; cards, dividers */
-  --paper: #FDFBF7;   /* warm off-white raised surfaces */
-  --gold:  #D8A748;   /* CTA buttons, taken from the live site */
-  --green: #547054;   /* eyebrows and social chips (darkened from the live
-                         site's lighter green, which missed AA on cream) */
-  --card:  #F7EFE4;   /* beige content cards */
+  /* Brand palette — EXACT values from the client's Elementor kit
+     (system_colors / custom_colors in the WordPress export). Do not
+     eyedrop these from screenshots; they came from the source. */
+  --brand:    #754C23;  /* Primary — brand brown */
+  --sage:     #6E9277;  /* Secondary */
+  --green:    #56734B;  /* eyebrows, footer headings, rules */
+  --body-txt: #717568;  /* Text */
+  --heading:  #202F00;  /* kit h1/h2/h3 colour */
+  --gold:     #E6AE59;  /* BOLD COLOR — buttons */
+  --tan:      #D39D71;  /* Accent */
+  --page:     #F1F4F3;  /* LIGHT BG — body background */
+  --white:    #FFFFFF;
+  --border:   #D9E2D5;  /* BORDER 1 */
+  --faded:    #DBDBDA;  /* faded display headings */
 
-  /* Derived roles — nothing below should use a raw hex value.
-     The mix percentages are chosen so each role clears WCAG AA (4.5:1)
-     against the surface it sits on. Changing them can break that. */
-  --bg-base:      var(--linen);
-  --bg-raised:    var(--paper);
-  --bg-band:      var(--ink);
-  --text:         var(--ink);
-  --text-muted:   color-mix(in srgb, var(--ink) 68%, var(--linen));   /* 4.92 */
-  --text-on-dark: var(--linen);
-  --text-on-dark-muted: color-mix(in srgb, var(--linen) 74%, var(--ink)); /* 7.77 */
-  --rule:         var(--mist);
-  --rule-on-dark: color-mix(in srgb, var(--linen) 22%, var(--ink));
-  --accent:       var(--brass);                                        /* 4.99 */
-  --accent-deep:  color-mix(in srgb, var(--brass) 82%, var(--ink));    /* 5.94 */
-  --accent-on-dark: color-mix(in srgb, var(--brass) 52%, var(--linen));/* 6.17 */
+  /* Legacy token names kept so existing rules keep working */
+  --ink:   var(--heading);
+  --sage-legacy: var(--sage);
+  --brass: var(--brand);
+  --linen: var(--page);
+  --mist:  var(--border);
+  --paper: var(--white);
+  --card:  color-mix(in srgb, var(--tan) 10%, var(--white));
+
+  /* Derived roles */
+  --bg-base:      var(--page);
+  --bg-raised:    var(--white);
+  --bg-band:      var(--heading);
+  --text:         var(--body-txt);
+  --text-muted:   var(--body-txt);
+  --text-on-dark: var(--white);
+  --text-on-dark-muted: color-mix(in srgb, var(--white) 80%, var(--heading));
+  --rule:         var(--border);
+  --rule-on-dark: color-mix(in srgb, var(--white) 24%, var(--heading));
+  --accent:       var(--brand);
+  --accent-deep:  color-mix(in srgb, var(--brand) 85%, var(--heading));
+  --accent-on-dark: var(--gold);
   --primary:      var(--sage);
-  --primary-deep: color-mix(in srgb, var(--sage) 52%, var(--ink));     /* 5.72 */
-  /* Button fill: sage is too light to carry cream text on its own. */
-  --primary-fill: color-mix(in srgb, var(--sage) 62%, var(--ink));     /* 5.45 */
-  --scrim:        color-mix(in srgb, var(--ink) 62%, transparent);
+  --primary-deep: var(--green);
+  --primary-fill: var(--green);
+  --scrim:        color-mix(in srgb, var(--heading) 62%, transparent);
 
   /* Type */
   --font-display: "Josefin Sans", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
@@ -1120,7 +1128,7 @@ a.card:hover {
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-weight: 300;
-  color: color-mix(in srgb, var(--ink) 22%, var(--linen));
+  color: var(--faded);
   max-width: 18ch;
   margin-inline: auto;
 }
@@ -1156,7 +1164,7 @@ a.card:hover {
 /* Footer: centred wordmark on white, then a tinted bar of columns */
 .footer-mark { background: var(--paper); padding-block: var(--space-xl); display: grid; place-items: center; }
 .footer-mark img { width: 15rem; height: auto; }
-.site-footer { background: #F1F0EE; border-top: 0; }
+.site-footer { background: var(--page); border-top: 0; }
 .footer-grid { text-align: center; }
 .footer-col h2 {
   color: var(--green);
@@ -1210,7 +1218,7 @@ a.card:hover {
 .trio--flank > .stack { align-self: start; display: grid; gap: var(--space-xl); }
 
 /* Footer bar should run to the bottom of the document */
-body { background: #F1F0EE; }
+body { background: var(--page); }
 main { background: var(--linen); }
 
 
@@ -1273,7 +1281,7 @@ main { background: var(--linen); }
 /* --- "How can we help you" section, matched to the reference --- */
 
 /* This section's eyebrow is gold rather than the green used elsewhere */
-.eyebrow--gold { color: var(--gold); font-weight: 400; }
+.eyebrow--gold { color: var(--tan); font-weight: 400; }
 
 /* Service cards: taller, roomier, no trailing link, gold outline on hover */
 .cards { gap: var(--space-m); }
