@@ -48,6 +48,24 @@
   }
 
   /* ------------------------------------------------------------------
+     1b. Back-to-top
+        Hidden until the visitor is a screen or so down the page.
+     ------------------------------------------------------------------ */
+  var toTop = document.querySelector('[data-to-top]');
+  if (toTop) {
+    var syncToTop = function () {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      toTop.classList.toggle('is-visible', y > window.innerHeight * 0.6);
+    };
+    syncToTop();
+    window.addEventListener('scroll', syncToTop, { passive: true });
+    toTop.addEventListener('click', function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ------------------------------------------------------------------
      2. Contact form
         There is no backend. The handler validates with the browser's own
         constraint validation, then reveals an inline success message and
