@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder illustration of concentric rings over soft hills">
+  <rect width="800" height="600" fill="#FBFAF6"/>
+  <circle cx="400" cy="270" r="150" fill="#7C9082" opacity=".18"/>
+  <circle cx="400" cy="270" r="104" fill="none" stroke="#7C9082" stroke-width="2"/>
+  <circle cx="400" cy="270" r="58" fill="none" stroke="#B0813A" stroke-width="2"/>
+  <circle cx="400" cy="270" r="14" fill="#B0813A" opacity=".8"/>
+  <path d="M0 430c130-60 230-20 330 20s230 60 470-30v180H0z" fill="#D8DED4"/>
+  <path d="M0 480c150-40 260 10 360 44s250 40 440-24v100H0z" fill="#7C9082" opacity=".4"/>
+  <path d="M60 120h120M620 120h120" stroke="#B0813A" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+</svg>

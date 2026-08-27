@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder illustration of a compass rose inside a soft arch">
+  <rect width="800" height="600" fill="#EDEFE8"/>
+  <path d="M240 520V300a160 160 0 0 1 320 0v220z" fill="#FBFAF6" stroke="#D8DED4" stroke-width="2"/>
+  <circle cx="400" cy="310" r="96" fill="none" stroke="#7C9082" stroke-width="2"/>
+  <path d="M400 226l26 58 58 26-58 26-26 58-26-58-58-26 58-26z" fill="#B0813A" opacity=".85"/>
+  <path d="M400 420v70" stroke="#7C9082" stroke-width="3" stroke-linecap="round"/>
+  <path d="M120 520h560" stroke="#D8DED4" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="160" cy="180" r="6" fill="#B0813A" opacity=".6"/>
+  <circle cx="650" cy="150" r="9" fill="#7C9082" opacity=".5"/>
+</svg>

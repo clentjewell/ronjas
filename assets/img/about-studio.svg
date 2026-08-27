@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder illustration of a quiet room with a window and plant">
+  <rect width="800" height="600" fill="#EDEFE8"/>
+  <rect x="110" y="90" width="300" height="330" rx="150" fill="#FBFAF6" stroke="#D8DED4" stroke-width="2"/>
+  <path d="M260 90v330M110 255h300" stroke="#D8DED4" stroke-width="2"/>
+  <path d="M470 420h230v20H470z" fill="#D8DED4"/>
+  <path d="M585 420c-40-40-30-110 0-150 30 40 40 110 0 150z" fill="#7C9082" opacity=".65"/>
+  <path d="M585 420v-150" stroke="#16211F" stroke-width="2" opacity=".35"/>
+  <path d="M0 480h800" stroke="#D8DED4" stroke-width="3"/>
+  <circle cx="700" cy="150" r="46" fill="#B0813A" opacity=".25"/>
+</svg>
