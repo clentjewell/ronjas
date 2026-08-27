@@ -2,7 +2,7 @@
   // Cloudflare Workers — static assets only. There is no Worker script and no
   // build step: wrangler uploads the files in this directory as-is.
   // Deploy with:  npx wrangler deploy
-  "name": "wildlight-wellness",
+  "name": "ronjasjoy",
   "compatibility_date": "2026-08-27",
   "assets": {
     "directory": "./",

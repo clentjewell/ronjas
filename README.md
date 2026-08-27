@@ -226,7 +226,7 @@ no bundler, no framework. Wrangler uploads the files exactly as they are in this
 repo, so the "no build step" rule still holds: `wrangler.jsonc` is hosting
 configuration, not a build pipeline.
 
-Live: <https://wildlight-wellness.clent.workers.dev>
+Live: <https://ronjasjoy.clent.workers.dev>
 
 ### Deploying an update
 
@@ -287,9 +287,9 @@ ever uploaded. Concurrent runs cancel in-flight ones so a newer push always wins
 
 ### Custom domain
 
-`wildlight-wellness.clent.workers.dev` is the free workers.dev subdomain. To put
+`ronjasjoy.clent.workers.dev` is the free workers.dev subdomain. To put
 this on a real domain, add the domain to the same Cloudflare account, then attach
-it under Workers &amp; Pages → wildlight-wellness → Settings → Domains & Routes.
+it under Workers &amp; Pages → ronjasjoy → Settings → Domains & Routes.
 
 ---
 
