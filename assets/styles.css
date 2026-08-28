@@ -1355,3 +1355,116 @@ a.card--beige:hover {
 @media (max-width: 54em) {
   .intro-split h2 { font-size: clamp(2rem, 1.2rem + 3.5vw, 49px); }
 }
+
+/* ==========================================================================
+   16. TYPE SYSTEM TAKEN FROM THE LIVE SITE
+   Extracted from the client's Elementor kit stylesheet (post-8.css) and the
+   home page stylesheet (post-39.css), not measured from screenshots. Sizes
+   are fixed as on the original, with a single mobile reduction.
+   ========================================================================== */
+:root {
+  --font-display: "Josefin Sans", "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-alt:     "Roboto Flex", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body:    "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-serif:   "Oranienbaum", Georgia, serif;
+}
+
+/* Body copy — kit "text" token */
+body {
+  font-family: var(--font-alt);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7em;
+  color: #717568;
+}
+
+/* Kit heading scale. Colours: h1–h4 primary, h5 text, h6 secondary. */
+h1, .h1 { font-family: var(--font-display); font-size: 40px; font-weight: 500; text-transform: uppercase; line-height: 1.2em; letter-spacing: 0;      color: #754C23; }
+h2, .h2 { font-family: var(--font-display); font-size: 33px; font-weight: 500; text-transform: none;      line-height: 1.2em; letter-spacing: -0.8px; color: #754C23; }
+h3, .h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.2em; letter-spacing: -0.8px; color: #754C23; }
+h4, .h4 { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: -1.7px; color: #754C23; }
+h5      { font-family: var(--font-display); font-size: 25px; font-weight: 500; line-height: 1.2em; color: #717568; }
+h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; text-transform: uppercase; line-height: 1.2em; letter-spacing: 1.2px; color: #6E9277; }
+
+/* Eyebrows — kit token d6b0df9 */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  line-height: 1.3em;
+  color: #56734B;
+}
+.eyebrow--gold, .intro-split .eyebrow--gold { color: #E6AE59; }
+
+/* Footer headings are h6; list text is kit token f4cdd3a */
+.footer-col h2 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 1.2px;
+  color: #6E9277;
+}
+.footer-col li, .footer-col li a {
+  font-family: var(--font-alt);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7em;
+  color: #717568;
+}
+.footer-col li:first-child a[href^="tel"] { color: #B85E0E; }
+
+/* Hero paragraph — Montserrat 19px 300, #050F018A */
+.hero-card p:not(.eyebrow):not(.hero-promise) {
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #050F018A;
+}
+/* Hero wordmark and promise — kit token 9550428 / aa9fcf0 */
+.hero-split h1 { font-size: 50px; font-weight: 500; line-height: 1.1em; letter-spacing: -1.9px; text-transform: none; color: #754C23; }
+.hero-split .hero-promise { font-family: var(--font-display); font-size: 34px; font-weight: 600; line-height: 1.2em; letter-spacing: 0.1px; color: #754C23; }
+
+/* Section intro — h2 token 9550428, supporting line token 18f376f */
+.intro-split h2 { font-size: 50px; font-weight: 500; line-height: 1.2em; letter-spacing: 0.1px; color: #754C23; text-transform: none; }
+.intro-split .stack p:not(.eyebrow) { font-family: var(--font-alt); font-size: 19px; font-weight: 300; line-height: 1.7em; color: #717568; }
+
+/* Cards — h3 token a8347c1, body Montserrat 17/400 */
+.card--beige h3 { font-family: var(--font-display); font-size: 26px; font-weight: 500; line-height: 1.2em; letter-spacing: 0.1px; color: #754C23; }
+.card--beige p  { font-family: var(--font-body); font-size: 17px; font-weight: 400; line-height: 1.7em; color: #717568; }
+
+/* Feature blocks — kit token 5996d8c */
+.feature h3, .feature h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3em;
+  letter-spacing: 1.3px;
+  color: #56734B;
+}
+.feature p { font-family: var(--font-body); font-size: 17px; font-weight: 400; line-height: 1.7em; color: #717568; }
+
+/* Single mobile reduction, mirroring the original's responsive behaviour */
+@media (max-width: 54em) {
+  .hero-split h1, .intro-split h2 { font-size: clamp(2rem, 1.1rem + 4vw, 50px); }
+  .hero-split .hero-promise { font-size: clamp(1.5rem, 1rem + 2.6vw, 34px); }
+  h1 { font-size: clamp(1.75rem, 1.2rem + 2.6vw, 40px); }
+  h2 { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 33px); }
+}
+
+/* Oversized faded heading — Josefin Sans, uppercase, kit faded colour */
+.watermark {
+  font-family: var(--font-display);
+  font-size: 61px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 0;
+  color: #DBDBDA;
+}
+@media (max-width: 54em) { .watermark { font-size: clamp(1.9rem, 1.1rem + 4vw, 61px); } }
