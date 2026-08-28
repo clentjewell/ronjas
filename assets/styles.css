@@ -1378,11 +1378,15 @@ body {
   color: #717568;
 }
 
-/* Kit heading scale. Colours: h1–h4 primary, h5 text, h6 secondary. */
-h1, .h1 { font-family: var(--font-display); font-size: 40px; font-weight: 500; text-transform: uppercase; line-height: 1.2em; letter-spacing: 0;      color: #754C23; }
-h2, .h2 { font-family: var(--font-display); font-size: 33px; font-weight: 500; text-transform: none;      line-height: 1.2em; letter-spacing: -0.8px; color: #754C23; }
-h3, .h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.2em; letter-spacing: -0.8px; color: #754C23; }
-h4, .h4 { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: -1.7px; color: #754C23; }
+/* Kit heading scale — DESKTOP values, straight from .elementor-kit-8.
+   The smaller numbers that used to be here are the kit's own
+   @media (max-width:767px) overrides; they are reinstated verbatim at the
+   foot of this section. Tokens: h1 f25d5db · h2 6d0aee7 · h3 c4638cb ·
+   h4 c55172d · h5 4ce22d9 · h6 6fc617c. */
+h1, .h1 { font-family: var(--font-display); font-size: 50px; font-weight: 500; text-transform: uppercase; line-height: 1.2em; letter-spacing: 0;      color: #754C23; }
+h2, .h2 { font-family: var(--font-display); font-size: 49px; font-weight: 500; text-transform: none;      line-height: 1.2em; letter-spacing: -0.8px; color: #754C23; }
+h3, .h3 { font-family: var(--font-display); font-size: 46px; font-weight: 400; line-height: 1.2em; letter-spacing: -0.8px; color: #754C23; }
+h4, .h4 { font-family: var(--font-display); font-size: 34px; font-weight: 500; line-height: 1.2em; letter-spacing: -1.7px; color: #754C23; }
 h5      { font-family: var(--font-display); font-size: 25px; font-weight: 500; line-height: 1.2em; color: #717568; }
 h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; text-transform: uppercase; line-height: 1.2em; letter-spacing: 1.2px; color: #6E9277; }
 
@@ -1425,12 +1429,12 @@ h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; t
   line-height: 1.7em;
   color: #050F018A;
 }
-/* Hero wordmark and promise — kit token 9550428 / aa9fcf0 */
-.hero-split h1 { font-size: 50px; font-weight: 500; line-height: 1.1em; letter-spacing: -1.9px; text-transform: none; color: #754C23; }
+/* Hero wordmark and promise — kit token aa9fcf0 (68px) / 1693da1 (34px) */
+.hero-split h1 { font-size: 68px; font-weight: 500; line-height: 1.1em; letter-spacing: -1.9px; text-transform: none; color: #754C23; }
 .hero-split .hero-promise { font-family: var(--font-display); font-size: 34px; font-weight: 600; line-height: 1.2em; letter-spacing: 0.1px; color: #754C23; }
 
-/* Section intro — h2 token 9550428, supporting line token 18f376f */
-.intro-split h2 { font-size: 50px; font-weight: 500; line-height: 1.2em; letter-spacing: 0.1px; color: #754C23; text-transform: none; }
+/* Section intro — h2 token 9550428 (92px), supporting line token 18f376f */
+.intro-split h2 { font-size: 92px; font-weight: 500; line-height: 1.2em; letter-spacing: 0.1px; color: #754C23; text-transform: none; }
 .intro-split .stack p:not(.eyebrow) { font-family: var(--font-alt); font-size: 19px; font-weight: 300; line-height: 1.7em; color: #717568; }
 
 /* Cards — h3 token a8347c1, body Montserrat 17/400 */
@@ -1449,25 +1453,35 @@ h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; t
 }
 .feature p { font-family: var(--font-body); font-size: 17px; font-weight: 400; line-height: 1.7em; color: #717568; }
 
-/* Single mobile reduction, mirroring the original's responsive behaviour */
-@media (max-width: 54em) {
-  .hero-split h1, .intro-split h2 { font-size: clamp(2rem, 1.1rem + 4vw, 50px); }
-  .hero-split .hero-promise { font-size: clamp(1.5rem, 1rem + 2.6vw, 34px); }
-  h1 { font-size: clamp(1.75rem, 1.2rem + 2.6vw, 40px); }
-  h2 { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 33px); }
+/* Oversized faded display heading — token 9550428 at 92px in kit colour
+   10242b9 (#C0C0C052, i.e. silver at 32% — it reads as pale grey on white).
+   Used for the home divider heading and for every inner-page <h1>. */
+.watermark, .page-head h1 {
+  font-family: var(--font-display);
+  font-size: 92px;
+  font-weight: 500;
+  line-height: 1.2em;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  color: #C0C0C052;
 }
 
-/* Oversized faded heading — Josefin Sans, uppercase, kit faded colour */
-.watermark {
-  font-family: var(--font-display);
-  font-size: 61px;
-  font-weight: 500;
-  text-transform: uppercase;
-  line-height: 1.2em;
-  letter-spacing: 0;
-  color: #DBDBDA;
+/* The kit's own breakpoint. Everything above uses the desktop scale; these
+   are the exact @media (max-width:767px) overrides from .elementor-kit-8,
+   plus one fluid step below 480px so nothing overflows on a phone. */
+@media (max-width: 767px) {
+  h1, .h1 { font-size: 40px; }
+  h2, .h2 { font-size: 33px; }
+  h3, .h3 { font-size: 28px; }
+  h4, .h4 { font-size: 26px; }
+  .watermark, .page-head h1, .intro-split h2, .hero-split h1 { font-size: 50px; }
 }
-@media (max-width: 54em) { .watermark { font-size: clamp(1.9rem, 1.1rem + 4vw, 61px); } }
+@media (max-width: 30em) {
+  .watermark, .page-head h1, .intro-split h2, .hero-split h1 { font-size: clamp(2rem, 1.1rem + 6vw, 50px); }
+  h1, .h1 { font-size: clamp(1.75rem, 1.2rem + 3.4vw, 40px); }
+  h2, .h2 { font-size: clamp(1.6rem, 1.1rem + 2.8vw, 33px); }
+  h3, .h3 { font-size: clamp(1.5rem, 1.1rem + 2.2vw, 28px); }
+}
 
 /* --------------------------------------------------------------------------
    17. SECTION BACKGROUNDS — exact values from post-39.css
@@ -1489,3 +1503,560 @@ h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; t
 .section--flush-bottom { padding-bottom: 0; }
 .section--flush-bottom .watermark { position: relative; z-index: 1; margin-bottom: -0.42em; }
 .section--flush-top { padding-top: var(--space-2xl); }
+
+/* ==========================================================================
+   18. INNER PAGES — About Us, Services, Events, Contact Us
+   Every value below is read out of the client's live Elementor stylesheets:
+   post-45 (Services), post-205 (About Us), post-225 (Contact Us),
+   post-252 (Events), resolved through the kit tokens in post-8. Nothing here
+   is eyedropped.
+   ========================================================================== */
+
+/* --- Page head: white band, sage eyebrow, oversized faded h1 -------------
+   Containers 2fd5485f / 5cc2bc38 / 321f045f / 7fad238d are all
+   background f81cc9c (#FFFFFF) with 100px top padding and 0 bottom; the
+   inner container adds 60px top and bottom. */
+.page-head {
+  background: #FFFFFF;
+  padding-block: 160px 60px;
+  text-align: center;
+}
+.page-head .eyebrow { color: #6E9277; }
+/* margin-bottom is set in section 19 — the heading bleeds into the band below */
+.page-head h1 { margin-top: 0; }
+
+/* --- Lead band: linen strip, 661px measure, Josefin 25px -----------------
+   Containers 2f7c529c / f305d61 / 7a1b61fe / 2ed3cff9, token 54be6f7. */
+.lead-band { background: #F1F4F3; padding-block: 50px; }
+.lead-band .wrap { max-width: 661px; }
+.lead-band p {
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #754C23;
+  text-align: center;
+  margin: 0;
+}
+
+/* --- Buttons: the kit's own button rule ---------------------------------
+   .elementor-kit-8 .elementor-button — gold, white, square, Josefin 700. */
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  padding: 15px 25px 12px;
+  font-size: 16px;
+}
+.btn--primary, .btn--on-ink { background: #E6AE59; color: #FFFFFF; }
+.btn--primary:hover, .btn--on-ink:hover { background: #6E9277; color: #FFFFFF; }
+/* Event-card buttons carry their own pair (accent fill, gold label) */
+.btn--accent { background: #D39D711A; color: #E6AE59; }
+.btn--accent:hover { background: #6E9277; color: #FFFFFF; }
+
+/* --- Shared grid for the card decks on these pages ---------------------- */
+.deck {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+}
+.deck--3 { grid-template-columns: repeat(3, 1fr); }
+.deck--2 { grid-template-columns: repeat(2, 1fr); }
+/* Four items at --width:30.017% in a nowrap row shrink to a quarter each */
+.deck--4 { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+.deck--tight { gap: 30px; }
+/* Every multi-column row on these pages carries --flex-direction:column
+   below 1025px in the client's own stylesheets, so they all collapse here. */
+@media (max-width: 1024px) {
+  .deck, .deck--3, .deck--2, .deck--4 { grid-template-columns: 1fr; }
+}
+
+/* --- SERVICES ------------------------------------------------------------
+   Approach block (1e34f14a): white text card, a photo-backed column, and a
+   third column holding a photograph. */
+/* Column widths are the container's own --width values (40% / 77% / 50.563%);
+   they overflow 100% and flex-shrink resolves them to this ratio. */
+.approach {
+  display: grid;
+  grid-template-columns: 40fr 77fr 50.563fr;
+  align-items: stretch;
+}
+.approach .approach-copy { background: #FFFFFF; padding: 60px; }
+.approach .approach-copy .eyebrow { color: #E6AE59; }
+.approach .approach-photo { min-height: 26rem; background-size: cover; background-position: center; }
+.approach .approach-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1024px) {
+  .approach { grid-template-columns: 1fr; }
+  .approach .approach-copy { padding: 40px 28px; }
+  .approach .approach-photo { min-height: 18rem; }
+}
+
+/* Service cards (23af4ce and siblings): accent fill, 40px, centred,
+   heading token a8347c1, body at the kit text size. */
+.service-card {
+  background: #D39D711A;
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.service-card img { width: 100%; height: 15rem; object-fit: cover; display: block; }
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2em;
+  letter-spacing: 0.1px;
+  color: #754C23;
+  margin: 0;
+}
+.service-card p { font-size: 17px; font-weight: 400; line-height: 1.7em; color: #717568; margin: 0; }
+
+/* FAQ (5bba42f): closed rows sit on linen, body copy at the kit text size. */
+.faq-list { display: grid; gap: 12px; }
+.faq-list details {
+  background: #F1F4F3;
+  border: 1px solid #CD7F3252;
+}
+.faq-list summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  color: #754C23;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+/* A plus that becomes a minus, matching the accordion's own toggle icons. */
+.faq-list summary::after {
+  content: "+";
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1;
+  color: #6E9277;
+  flex: none;
+}
+.faq-list details[open] summary::after { content: "\2212"; }
+.faq-list details > p {
+  margin: 0;
+  padding: 0 24px 22px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7em;
+  color: #717568;
+}
+
+/* "How can we help you" cards (4753d644 and siblings): white, 50px, h6. */
+.help-card {
+  background: #FFFFFF;
+  padding: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+.help-card img { width: 3.6rem; height: 3.6rem; object-fit: contain; }
+.help-card h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.2em;
+  letter-spacing: 1.2px;
+  color: #6E9277;
+  margin: 0;
+}
+.help-card p { font-size: 17px; line-height: 1.7em; color: #717568; margin: 0; }
+
+/* --- ABOUT US ------------------------------------------------------------
+   Container 2c5ff4dd: white copy card, photo column, accent checklist card. */
+/* --width values on 46019014 / 65704451 / 49b2aae, gap 0 */
+.story-trio { display: grid; grid-template-columns: 33.3fr 37.647fr 27fr; align-items: stretch; }
+.story-trio .panel-white { background: #FFFFFF; padding: 60px; }
+.story-trio .panel-accent { background: #D39D711A; padding: 60px; }
+.story-trio .panel-accent h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3em;
+  letter-spacing: 1.3px;
+  color: #754C23;
+  margin: 0 0 0.8em;
+}
+.story-trio .panel-photo { min-height: 26rem; }
+.story-trio .panel-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1024px) {
+  .story-trio { grid-template-columns: 1fr; }
+  .story-trio .panel-white, .story-trio .panel-accent { padding: 40px 28px; }
+}
+
+/* Checklist ticks on the accent panel are gold (icon-list colour 087bab7) */
+.panel-accent .checklist .tick { color: #E6AE59; }
+
+/* "Where healing begins" (77288e48): white, two stacked blocks 60px apart.
+   Its sub-headings are the small-caps token 5996d8c, not the kit h3. */
+.story-band { background: #FFFFFF; }
+.story-band .eyebrow { color: #E6AE59; }
+.story-band h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3em;
+  letter-spacing: 1.3px;
+  color: #754C23;
+}
+
+/* Practitioners (2c320689): photo column beside a white card. */
+.pro-split { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.pro-split .pro-photo { min-height: 24rem; }
+.pro-split .pro-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pro-split .pro-card { background: #FFFFFF; padding: 30px 40px; }
+/* Heading 397d994b carries its own 29px/400, overriding the kit h3. */
+.pro-split .pro-card h3 { font-size: 29px; font-weight: 400; color: #754C23; }
+@media (max-width: 1024px) { .pro-split { grid-template-columns: 1fr; } }
+
+/* "Why choose us" cards (2c71e8e8 and siblings): transparent with a 1px
+   #CD7F3252 border and 50px padding; they fill white on hover. */
+.reason-card {
+  border: 1px solid #CD7F3252;
+  padding: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color var(--transition);
+}
+.reason-card:hover { background: #FFFFFF; }
+.reason-card .badge {
+  background: #E6AE59;
+  border-radius: 50%;
+  width: 5.5rem;
+  height: 5.5rem;
+  display: grid;
+  place-items: center;
+}
+.reason-card .badge img { width: 2.6rem; height: 2.6rem; object-fit: contain; }
+.reason-card h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2em;
+  letter-spacing: 0.1px;
+  color: #754C23;
+  margin: 0;
+}
+.reason-card p { font-size: 17px; line-height: 1.7em; color: #717568; margin: 0; }
+
+/* --- EVENTS --------------------------------------------------------------
+   Offer cards (5d2d6dec and siblings): white, 50px, left-aligned. */
+.offer-card {
+  background: #FFFFFF;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.offer-card img { width: 100%; height: 17rem; object-fit: cover; display: block; }
+.offer-card .place {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3em;
+  letter-spacing: 1.3px;
+  color: #6E9277;
+  margin: 0;
+}
+.offer-card .place svg { width: 24px; height: 24px; flex: none; }
+.offer-card h3 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2em;
+  letter-spacing: 0.1px;
+  color: #754C23;
+  margin: 0;
+}
+/* The fee line is marked up as an <h2> on the original; it takes the kit
+   "secondary" token — Josefin 21/400 in body grey, not the h2 scale. */
+.offer-card .fee {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  color: #717568;
+  margin: 0;
+}
+.offer-card .fee s { color: #ABAEA4; }
+.offer-card p { font-size: 17px; line-height: 1.7em; color: #717568; margin: 0; }
+.offer-card .btn-row { gap: 1rem; flex-wrap: wrap; }
+
+/* Closing band on Events (79c69dbe) is the accent fill, not white. */
+.cta-band--accent { background: #D39D711A; }
+
+/* --- CONTACT US ----------------------------------------------------------
+   Container 6f0f791d: copy, form, photograph. */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } }
+
+/* icon-list 5bbbb413 is gold at weight 500 */
+.contact-list { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
+.contact-list li { display: flex; align-items: center; gap: 0.7rem; }
+.contact-list li, .contact-list a {
+  font-family: var(--font-alt);
+  font-size: 17px;
+  font-weight: 500;
+  color: #E6AE59;
+  text-decoration: none;
+}
+.contact-list a:hover { text-decoration: underline; }
+.contact-list svg { width: 20px; height: 20px; flex: none; }
+
+.contact-photo { margin-top: 48px; }
+.contact-photo img { display: block; width: 100%; height: auto; }
+
+/* --- Testimonials on Services and About (token 6c99b8a, quote mark
+   86ade31) -------------------------------------------------------------- */
+.quotes { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.quote-mark { display: block; margin: 0 auto 1rem; width: 3.5rem; height: 3.5rem; color: #CD7F3252; }
+.quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-align: center;
+}
+.quote blockquote {
+  margin: 0;
+  font-family: var(--font-alt);
+  font-size: 17px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.7em;
+  color: #717568;
+}
+.quote figcaption {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #6E9277;
+}
+
+/* --- Boxed width ---------------------------------------------------------
+   The kit sets --container-max-width:1190px on desktop (Elementor's own
+   default is 1140px), so a boxed row measures 1190px of content. .wrap is
+   border-box, hence 1190 + 2 x 10px of the container's default padding. */
+:root { --wrap: 1210px; }
+@media (min-width: 1210px) { .wrap { padding-inline: 10px; } }
+
+/* Four across, as on the original's "How can we help you" row */
+
+/* Attributions line up along the bottom of the row */
+.quote { justify-content: space-between; }
+.quote figcaption { margin-top: auto; padding-top: 0.6rem; }
+
+/* Container 77288e48 is flex-direction:column with a 60px gap — the story
+   and the two sub-headed blocks stack, they do not sit side by side. */
+.story-band .story-stack { display: grid; gap: 60px; }
+
+/* The original caps no paragraph measure — every text-editor widget fills
+   its container. Release the site-wide 62ch cap inside the blocks that are
+   full-width on the original, so line lengths match. */
+.story-band p,
+.story-trio p,
+.approach-copy p,
+.pro-card p,
+.contact-grid p,
+.lead-band p,
+.service-card p,
+.help-card p,
+.reason-card p,
+.offer-card p,
+.section--paper > .wrap > .stack--center > .lede,
+.section--linen > .wrap > .stack--center > .lede { max-width: none; }
+
+/* Services testimonial band (2b3d68ac) is a row: the heading block at 50%
+   and the quote block at 48.89%, not a stacked, centred pair. */
+.inspire-split { display: grid; grid-template-columns: 595fr 582fr; align-items: center; column-gap: 13px; }
+.inspire-split .quotes { grid-template-columns: 1fr; }
+@media (max-width: 1024px) { .inspire-split { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ==========================================================================
+   19. GEOMETRY MEASURED OFF THE LIVE SITE
+   Values below were read out of the running pages at a 1440px viewport
+   (getBoundingClientRect + getComputedStyle), not estimated. Boxed content
+   is 1190px; every top-level band is padded 120px block.
+   ========================================================================== */
+.section { padding-block: 120px; }
+.section--tight { padding-block: 120px 0; }
+
+/* Inner-page head: 120px above the eyebrow, nothing below the heading —
+   the linen lead band butts straight up against it. */
+.page-head { padding-block: 120px 0; }
+.page-head .wrap { padding-top: 50px; }
+/* Kit h1 is uppercase and the element rule never overrides text-transform,
+   so the oversized faded headings render uppercase on the original. */
+.watermark, .page-head h1 { text-transform: uppercase; }
+
+/* Services "Our Approach": measured 476 / 431 / 283 of the 1190 box. */
+.approach { grid-template-columns: 476fr 431fr 283fr; }
+.approach .approach-photo { min-height: 439px; }
+
+/* Card decks: 30.017% wide items, as set on the containers themselves. */
+.deck--3 { grid-template-columns: repeat(3, 30.017%); justify-content: center; }
+@media (max-width: 1024px) { .deck--3 { grid-template-columns: 1fr; } }
+
+/* About intro row: 33.3% / 37.647% / 27%, no gap. */
+.story-trio { grid-template-columns: 33.3% 37.647% 27%; }
+
+/* About practitioners row sits in a 1076px box, split in half, 80px card. */
+.pro-split { max-width: 1076px; margin-inline: auto; }
+.pro-split .pro-card { padding: 80px; }
+.pro-split .pro-card h3 { letter-spacing: -0.9px; }
+@media (max-width: 1024px) { .pro-split .pro-card { padding: 40px 28px; } }
+
+/* Heading-left / content-right rows: 524px beside 570px with a 96px gutter.
+   Used by the FAQ, the "How can we help you" intro and the About quotes. */
+.lr-split {
+  display: grid;
+  grid-template-columns: 524fr 570fr;
+  column-gap: 96px;
+  align-items: start;
+}
+.lr-split .quotes { grid-template-columns: 1fr; }
+@media (max-width: 1024px) { .lr-split { grid-template-columns: 1fr; row-gap: 40px; } }
+
+/* About "Where Healing Begins" is a row, 595 beside 512 with a 60px gap. */
+.story-band .story-stack {
+  display: grid;
+  grid-template-columns: 595fr 512fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 1024px) { .story-band .story-stack { grid-template-columns: 1fr; } }
+
+/* Closing bands are boxed to 1031px, not the full 1190. */
+.cta-band .wrap { max-width: 1031px; }
+
+/* Contact row: 347px of copy, an 83px gutter, a 737px photograph. */
+.contact-grid { grid-template-columns: 347fr 737fr; gap: 83px; }
+
+/* --- Home page, same measurement pass ------------------------------------
+   The wordmark is an <h2> at 51px/400, the promise line an <h2> at 30px/500,
+   and "Meet Ronja" an <h2> at 61px — none of them the kit's 49px default. */
+.hero-split h1 { font-size: 51px; font-weight: 400; letter-spacing: -0.8px; line-height: 1.2em; }
+.hero-split .hero-promise { font-size: 30px; font-weight: 500; letter-spacing: -0.8px; }
+.hero-card .eyebrow {
+  font-size: 16px; font-weight: 700; letter-spacing: 1.3px; color: #6E9277;
+}
+.trio-card h2 { font-size: 61px; letter-spacing: -0.8px; }
+.intro-split h2 { font-size: 49px; letter-spacing: -0.8px; }
+@media (max-width: 767px) {
+  .hero-split h1 { font-size: 40px; }
+  .hero-split .hero-promise { font-size: 26px; }
+  .trio-card h2, .intro-split h2 { font-size: 33px; }
+}
+
+/* Section 19 restates several grid templates, so its own collapse rules must
+   come last — otherwise the desktop templates outrank the earlier queries. */
+@media (max-width: 1024px) {
+  .approach,
+  .story-trio,
+  .contact-grid,
+  .inspire-split,
+  .lr-split,
+  .pro-split,
+  .story-band .story-stack,
+  .deck, .deck--2, .deck--3, .deck--4 { grid-template-columns: 1fr; }
+  .contact-grid { gap: 40px; }
+  .approach .approach-photo { min-height: 18rem; }
+}
+
+/* --- Exact paddings, gaps and the heading bleed ---------------------------
+   Elementor stacks widgets with a 20px gap by default, and both oversized
+   faded headings carry margin-bottom:-65px on their widget container, so the
+   type bleeds down over the band beneath. */
+.page-head .wrap { padding-top: 50px; }
+.page-head .stack { gap: 20px; }
+.page-head h1 { margin-top: 0; margin-bottom: -65px; }
+
+.lead-band { padding-block: 80px 0; }
+.lead-band .wrap { max-width: 661px; padding-inline: 0; }
+
+.service-card, .help-card, .reason-card, .offer-card,
+.story-trio .panel-white, .story-trio .panel-accent,
+.approach-copy, .pro-split .pro-card { gap: 20px; }
+
+/* Column tracks are percentages of the 1190px box so the fixed gaps do not
+   eat into them the way fr units would. */
+.story-band .story-stack { grid-template-columns: 50% 43.025%; column-gap: 60px; }
+.contact-grid { grid-template-columns: 29.16% 61.93%; column-gap: 6.97%; }
+.pro-split { padding-inline: 0; }
+/* The About card rows start at the left edge of the box; the Services rows
+   are centred in it. */
+.deck--start { justify-content: start; }
+@media (max-width: 1024px) {
+  .story-band .story-stack, .contact-grid { grid-template-columns: 1fr; }
+  .lead-band .wrap { padding-inline: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem); }
+}
+
+/* .stack spaces its children with margins, not gap, and .stack > .eyebrow + *
+   (0,2,1) outranks a plain .page-head h1 (0,1,1) — so the inner-page stacks
+   need selectors of their own to land the original's flat 20px widget gap. */
+.page-head .stack > * + *,
+.page-head .stack > .eyebrow + *,
+.approach-copy > * + *,  /* overridden to 10px below */
+.story-trio .stack > * + *,
+.story-trio .stack > .eyebrow + *,
+.story-band .stack > * + *,
+.story-band .stack > .eyebrow + *,
+.pro-split .pro-card > * + *,
+.contact-grid .stack > * + *,
+.contact-grid .stack > .eyebrow + *,
+.lr-split .stack > * + *,
+.lr-split .stack > .eyebrow + *,
+.inspire-split .stack > * + *,
+.cta-band .stack > * + * { margin-top: 20px; }
+
+/* The Our Approach card is the one block on 10px widget spacing */
+.approach-copy > * + * { margin-top: 10px; }
+
+/* --- Home page corrections from the same measurement pass -----------------
+   #56734B is not in the client's palette at all; every eyebrow on the live
+   site is either secondary (#6E9277) or the gold (#E6AE59). */
+.eyebrow { color: #6E9277; }
+
+/* "What You Receive:" is the small-caps token 5996d8c, not the kit h3 */
+.trio-card--beige h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3em;
+  letter-spacing: 1.3px;
+  color: #754C23;
+}
+/* Feature headings: brand brown beside the photograph, sage around the panel */
+.feature h3, .feature h4 { color: #6E9277; }
+.trio--flank > .feature h3 { color: #754C23; }
