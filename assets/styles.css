@@ -1272,7 +1272,8 @@ main { background: var(--linen); }
 .contact-rows svg { width: 1.1rem; height: 1.1rem; color: var(--gold); }
 .contact-rows a { color: var(--accent); text-decoration: none; }
 .contact-rows a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.contact-card h2 { font-size: var(--step-3); }
+/* "Get in touch" is the kit h2 at 49px on the live page, not a step down */
+.contact-card h2 { font-size: 49px; }
 
 /* Footer columns: keep single-line entries on one line */
 .footer-col li { text-wrap: nowrap; }
@@ -2060,3 +2061,195 @@ h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; t
 /* Feature headings: brand brown beside the photograph, sage around the panel */
 .feature h3, .feature h4 { color: #6E9277; }
 .trio--flank > .feature h3 { color: #754C23; }
+
+/* ==========================================================================
+   20. HOME PAGE — measured off the live page at 1440px
+   Same method as section 19: getBoundingClientRect and getComputedStyle on
+   the running site, then reproduced. Container ids are given so each value
+   can be traced back.
+   ========================================================================== */
+
+/* Paragraph default is the kit body token f4cdd3a — Roboto Flex 16/400.
+   17px was too big; only the home page's text widgets override it, and they
+   override it to Montserrat, not to a larger Roboto Flex. */
+body { font-size: 16px; }
+.service-card p, .help-card p, .reason-card p, .offer-card p,
+.contact-list li, .contact-list a { font-size: 16px; }
+
+/* Home text widgets: Montserrat 17/400 */
+.hero-card p:not(.eyebrow):not(.hero-promise), .trio-card p, .bordered-panel p, .pull-panel p,
+.contact-card p, .card--beige p, .feature p, .contact-rows li {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7em;
+}
+
+/* --- Hero (500f8855) — full-viewport photograph, translucent card ------- */
+.hero-split { min-height: 900px; background: none; }
+/* A fixed row height, not min-height: the photograph is 1440x961 and would
+   otherwise set the band's height from its own aspect ratio. */
+.hero-split .hero-media { grid-area: 1 / 1; height: 900px; min-height: 0; }
+.hero-split .hero-media img { object-position: 0% 50%; }
+.hero-split .hero-card {
+  /* 7eaee6c1: 526 wide, 80px padding, white at 86%, right-aligned inside
+     the hero's own 1315px content box and vertically centred. */
+  width: 526px;
+  padding: 80px;
+  background: rgba(255, 255, 255, 0.86);
+  margin: 0 max(0px, calc((100% - 1315px) / 2)) 0 0;
+}
+.hero-split .hero-card > * { max-width: none; }
+.hero-split .hero-card .stack > * + * { margin-top: 20px; }
+/* The wordmark is the one place the site uses Poppins */
+.hero-split h1 {
+  font-family: "Poppins", "Josefin Sans", Georgia, serif;
+  font-style: italic;
+  font-size: 51px;
+  font-weight: 400;
+  line-height: 1.7em;
+  letter-spacing: -0.8px;
+  color: #754C23;
+}
+.hero-split .hero-promise {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.3em;
+  letter-spacing: -0.8px;
+  color: #754C23;
+}
+@media (max-width: 1024px) {
+  .hero-split, .hero-split .hero-media { min-height: 0; height: auto; }
+  .hero-split .hero-media { min-height: 60vh; }
+  .hero-split .hero-card { width: auto; padding: 40px 28px; margin: 0; }
+}
+
+/* --- Faded divider heading (7537eeea): 120px above, nothing below ------- */
+.section--flush-bottom { padding-block: 120px 0; }
+.section--flush-bottom .wrap { padding-top: 50px; }
+.section--flush-bottom .stack > * + * { margin-top: 20px; }
+.section--flush-bottom .watermark { margin-bottom: -65px; max-width: none; }
+.section--flush-top { padding-top: 120px; }
+
+/* --- Meet Ronja row (e9d1c41): 396 / 321 / 448, 60px cards, no gap ----- */
+.trio--flush { grid-template-columns: 33.3% 27% 37.647%; gap: 0; }
+.trio--flush .trio-card { padding: 60px; }
+.trio--flush .trio-card > * + * { margin-top: 20px; }
+@media (max-width: 1024px) {
+  .trio--flush { grid-template-columns: 1fr; }
+  .trio--flush .trio-card { padding: 40px 28px; }
+}
+
+/* --- Embrace Healing (da7c132): 627px box, Montserrat 26/500 ----------- */
+.section--tight.section--paper > .wrap--narrow { max-width: 647px; }
+.section--tight.section--paper .lede {
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2em;
+  color: #717568;
+}
+
+/* --- Our Story (44caa5b7): 595 / 512, 60px gap, white panel at 40px ---- */
+.split--wide-text { grid-template-columns: 50% 43.025%; column-gap: 60px; }
+.bordered-panel { background: #FFFFFF; border: 0; padding: 40px; }
+.bordered-panel h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.3em;
+  letter-spacing: 1.3px;
+  color: #754C23;
+  text-align: center;
+}
+.bordered-panel p { text-align: center; }
+
+/* --- Icon blocks flanking a photograph (7090bb09): 421 / 348 / 421 ----- */
+.trio--flank { grid-template-columns: 421fr 348fr 421fr; gap: 0; align-items: stretch; }
+.trio--flank > .feature { padding: 120px 80px; }
+.trio--flank > .trio-media { padding-block: 120px; }
+/* Second flank row (363c58ea): 298 / 476 / 298 with an 80px gutter */
+.trio--flank--panel { grid-template-columns: 298fr 476fr 298fr; column-gap: 80px; }
+.trio--flank--panel > .feature, .trio--flank--panel > .stack { padding: 0; }
+@media (max-width: 1024px) {
+  .trio--flank, .trio--flank--panel { grid-template-columns: 1fr; row-gap: 40px; }
+  .trio--flank > .feature { padding: 0; }
+  .trio--flank > .trio-media { padding-block: 0; }
+}
+
+/* --- "How can we help you" intro (6987f9ba): 524 beside 559 ------------ */
+.intro-split { grid-template-columns: 524fr 559fr; column-gap: 100px; align-items: start; }
+.intro-split .stack p:not(.eyebrow) { text-align: left; }
+@media (max-width: 1024px) { .intro-split { grid-template-columns: 1fr; row-gap: 24px; } }
+
+/* --- Service cards (2385a104): 357 wide, 40px, on the accent fill ------
+   .section--paper .card--beige (0,2,0) used to win with an opaque cream. */
+.section--paper .card--beige, .card--beige { background: #D39D711A; padding: 40px; }
+.cards { grid-template-columns: repeat(3, 30.017%); justify-content: center; gap: 40px; }
+.cards.section-body { margin-top: 120px; }
+@media (max-width: 1024px) { .cards { grid-template-columns: 1fr; } }
+
+/* --- Pull panel (98eec86): linen, 50px, Josefin 25/400 ----------------- */
+.pull-panel { background: #F1F4F3; padding: 50px; text-align: center; }
+.pull-panel p {
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #717568;
+}
+
+/* --- Get in touch (6a3be415): 1218px box, 725 photo beside a 493 card -- */
+.contact-split { max-width: 1218px; margin-inline: auto; padding-inline: 0; grid-template-columns: 725fr 493fr; gap: 0; }
+.contact-split .contact-media { border-radius: 0 5px 0 0; overflow: hidden; }
+.contact-split .contact-card { padding: 60px; }
+.contact-split .contact-card > * + * { margin-top: 20px; }
+@media (max-width: 1024px) {
+  .contact-split { grid-template-columns: 1fr; padding-inline: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem); }
+  .contact-split .contact-card { padding: 40px 28px; }
+}
+
+@media (max-width: 1024px) {
+  .split--wide-text { grid-template-columns: 1fr; row-gap: 40px; }
+}
+
+/* ==========================================================================
+   21. HAIRLINES
+   The original rules several bands and cards with 1px borders in the kit's
+   border colours — 2e5e5a6 (#D9E2D5) and 86ade31 (#CD7F3252). They are faint
+   but they are what separates the icon rows and the offer cards.
+   ========================================================================== */
+.section--ruled { border-block: 1px solid #D9E2D5; }        /* 7090bb09 · 363c58ea · 2b3d68ac · 77288e48 */
+.trio--flank > .trio-media { border-inline: 1px solid #D9E2D5; }  /* 1ec51982 */
+.bordered-panel { border: 1px solid #D9E2D5; }              /* 3e7f3a2d */
+.hero-split .hero-card { border: 1px solid #D9E2D5; }       /* 7eaee6c1 */
+.service-card { border: 1px solid #FFFFFF; }                /* 748fe328 */
+.inspire-split > :last-child { border-left: 1px solid #D9E2D5; padding-left: 40px; }  /* f40e0f3 */
+.help-card { border: 1px solid #CD7F3252; }                 /* 4753d644 */
+.story-band { border-block: 1px solid #D9E2D5; }            /* 77288e48 */
+.pro-split .pro-photo { border-right: 1px solid #CD7F3252; }/* 214c5a41 */
+.offer-card { border: 1px solid #D9E2D5; }                  /* 5d2d6dec */
+.offer-card .place { border-bottom: 1px solid #D9E2D5; padding-bottom: 15px; }  /* bca8dab */
+@media (max-width: 1024px) {
+  .trio--flank > .trio-media { border-inline: 0; }
+  .inspire-split > :last-child { border-left: 0; padding-left: 0; }
+  .pro-split .pro-photo { border-right: 0; }
+}
+
+/* Icon lists (1d792901 · 70d48051): gold 14px ticks, Montserrat text, no
+   dividers between rows — the original draws none. */
+.checklist { gap: 8px; }
+.checklist li {
+  grid-template-columns: 14px 1fr;
+  gap: 4px 7px;
+  padding-bottom: 0;
+  border-bottom: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7em;
+  color: #717568;
+}
+.checklist .tick { color: #E6AE59; margin-top: 7px; }
+.checklist .tick svg { width: 14px; height: 14px; }
