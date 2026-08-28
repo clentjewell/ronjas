@@ -1468,3 +1468,24 @@ h6      { font-family: var(--font-display); font-size: 18px; font-weight: 600; t
   color: #DBDBDA;
 }
 @media (max-width: 54em) { .watermark { font-size: clamp(1.9rem, 1.1rem + 4vw, 61px); } }
+
+/* --------------------------------------------------------------------------
+   17. SECTION BACKGROUNDS — exact values from post-39.css
+   f81cc9c #FFFFFF · accent #D39D711A · 1e2dcfa #F1F4F3
+   -------------------------------------------------------------------------- */
+.section--paper { background: #FFFFFF; }
+.section--linen { background: #F1F4F3; }
+
+/* Cards use the accent at its real alpha so they composite as on the original */
+.trio-card { background: #FFFFFF; }
+/* Must follow .trio-card: equal specificity, so source order decides. */
+.card--beige,
+.trio-card.trio-card--beige { background: #D39D711A; }
+.contact-card { background: #FFFFFF; }
+.pull-panel { background: #F1F4F3; }
+.bordered-panel { background: #FFFFFF; }
+
+/* The oversized faded heading bleeds over the band below it, as on the site */
+.section--flush-bottom { padding-bottom: 0; }
+.section--flush-bottom .watermark { position: relative; z-index: 1; margin-bottom: -0.42em; }
+.section--flush-top { padding-top: var(--space-2xl); }
